@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Problem Bank – Real Problems, Real Startup Ideas</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f8fafc;
+      color: #0f172a;
+      line-height: 1.6;
+    }
+    .container { max-width: 1024px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+    .hero { text-align: center; margin-bottom: 3rem; }
+    .badge {
+      background: #dbeafe; color: #1e40af; padding: 0.3rem 1rem;
+      border-radius: 20px; font-size: 0.9rem; font-weight: 600;
+      display: inline-block; margin-bottom: 1.5rem; letter-spacing: 0.5px;
+    }
+    h1 {
+      font-size: 3rem; font-weight: 800;
+      background: linear-gradient(135deg, #0f172a 0%, #3b82f6 80%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; margin-bottom: 1rem;
+    }
+    .hero-subtitle { font-size: 1.35rem; color: #475569; max-width: 600px; margin: 0 auto 2rem; }
+
+    .stats-grid { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-bottom: 2rem; }
+    .stat-card {
+      background: white; border-radius: 20px; padding: 1.5rem 2.5rem;
+      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05), 0 10px 10px -5px rgba(0,0,0,0.02);
+      text-align: center; transition: transform 0.2s;
+    }
+    .stat-card:hover { transform: translateY(-5px); }
+    .stat-number { font-size: 2.8rem; font-weight: 800; color: #2563eb; line-height: 1.2; }
+    .stat-label { font-size: 0.95rem; color: #64748b; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+
+    .live-alert {
+      background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 12px;
+      padding: 0.9rem 1.5rem; margin: 1.5rem 0 2.5rem; display: flex;
+      align-items: center; gap: 0.5rem; color: #065f46; font-weight: 500;
+      justify-content: center;
+    }
+    .live-dot {
+      width: 10px; height: 10px; background: #10b981; border-radius: 50%;
+      display: inline-block; margin-right: 6px;
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+      animation: pulse-dot 1.5s infinite;
+    }
+    @keyframes pulse-dot {
+      0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+      70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+
+    .cta-bar {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      border-radius: 24px; padding: 2.5rem 2rem; color: white;
+      display: flex; flex-wrap: wrap; align-items: center;
+      justify-content: space-between; gap: 2rem; margin: 2rem 0;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+    }
+    .cta-text { font-size: 1.8rem; font-weight: 700; letter-spacing: -0.5px; }
+    .cta-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      padding: 0.8rem 1.8rem; border-radius: 50px; font-weight: 600;
+      font-size: 1rem; cursor: pointer; transition: all 0.25s;
+      border: none; text-decoration: none; display: inline-flex;
+      align-items: center; gap: 0.4rem;
+    }
+    .btn-primary { background: #3b82f6; color: white; box-shadow: 0 10px 15px -3px rgba(59,130,246,0.3); }
+    .btn-primary:hover { background: #2563eb; transform: translateY(-2px); }
+    .btn-outline { background: transparent; color: white; border: 2px solid rgba(255,255,255,0.5); }
+    .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: white; }
+
+    .section-title { font-size: 2rem; font-weight: 700; margin: 2.5rem 0 1.5rem; color: #0f172a; }
+    .problem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.8rem; margin-bottom: 2rem; }
+    .problem-card {
+      background: white; border-radius: 20px; padding: 1.8rem;
+      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.03), 0 10px 10px -5px rgba(0,0,0,0.02);
+      transition: all 0.3s; border: 1px solid #f1f5f9;
+      display: flex; flex-direction: column;
+    }
+    .problem-card:hover { transform: translateY(-8px); box-shadow: 0 30px 40px -10px rgba(0,0,0,0.1); border-color: #e2e8f0; }
+    .problem-text { font-size: 1.2rem; font-weight: 500; margin-bottom: 1.5rem; flex-grow: 1; color: #1e293b; }
+    .vote-badge {
+      background: #f1f5f9; padding: 0.5rem 1.2rem; border-radius: 30px;
+      font-size: 0.9rem; font-weight: 600; color: #475569;
+      display: inline-flex; align-items: center; gap: 0.3rem; width: fit-content;
+    }
+
+    .submit-section {
+      background: white; border-radius: 24px; padding: 2.5rem;
+      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.03);
+      margin: 2.5rem 0; border: 1px solid #f1f5f9;
+    }
+    .submit-section h2 { font-size: 1.8rem; margin-bottom: 0.5rem; }
+    .form-wrapper { display: flex; gap: 0.8rem; margin-top: 1.5rem; flex-wrap: wrap; }
+    .form-wrapper input {
+      flex: 1; padding: 1rem 1.5rem; border: 2px solid #e2e8f0;
+      border-radius: 50px; font-size: 1rem; outline: none; transition: border 0.2s;
+    }
+    .form-wrapper input:focus { border-color: #3b82f6; }
+    .btn-submit {
+      background: #10b981; color: white; padding: 0.9rem 2rem;
+      border: none; border-radius: 50px; font-weight: 600; cursor: pointer;
+      font-size: 1rem; transition: all 0.2s; box-shadow: 0 8px 14px -6px rgba(16,185,129,0.4);
+    }
+    .btn-submit:hover { background: #059669; transform: translateY(-1px); }
+    .feedback-msg { margin-top: 1rem; color: #059669; font-weight: 500; display: none; }
+
+    .modal {
+      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(15,23,42,0.7); backdrop-filter: blur(4px);
+      justify-content: center; align-items: center; z-index: 100;
+    }
+    .modal-content {
+      background: white; border-radius: 28px; padding: 2.5rem;
+      max-width: 420px; width: 90%; text-align: center;
+      box-shadow: 0 40px 60px -15px rgba(0,0,0,0.3); position: relative;
+    }
+    .modal-content h2 { font-size: 1.8rem; margin-bottom: 0.8rem; }
+    .modal-content p { color: #475569; margin-bottom: 1.5rem; }
+    .close-modal {
+      background: none; border: none; font-size: 2rem; cursor: pointer;
+      position: absolute; top: 0.5rem; right: 1.2rem; color: #64748b;
+    }
+    .privacy-note { font-size: 0.8rem; color: #94a3b8; margin-top: 0.7rem; line-height: 1.5; }
+    .privacy-note a { color: #3b82f6; text-decoration: underline; }
+
+    footer { text-align: center; color: #94a3b8; margin-top: 3rem; font-size: 0.9rem; }
+    footer a { color: #3b82f6; text-decoration: none; }
+
+    @media (max-width: 640px) {
+      h1 { font-size: 2.2rem; }
+      .cta-bar { flex-direction: column; text-align: center; }
+      .cta-text { font-size: 1.4rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="hero">
+    <!-- تم تغيير البادج: لا ذكر لـ r/SomebodyMakeThis -->
+    <div class="badge">🔍 Curated from real online communities</div>
+    <h1>Problem Bank</h1>
+    <p class="hero-subtitle">Browse validated, unsolved problems people are begging to be fixed. Your next startup idea is one click away.</p>
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-number" id="problemCount">127</div><div class="stat-label">Real Problems</div></div>
+      <!-- تم تغيير Makers إلى Entrepreneurs -->
+      <div class="stat-card"><div class="stat-number" id="entrepreneurCount">14</div><div class="stat-label">Entrepreneurs Interested</div></div>
+      <div class="stat-card"><div class="stat-number">3</div><div class="stat-label">Solutions Started</div></div>
+    </div>
+    <div class="live-alert" id="latestAlert"><span class="live-dot"></span> New problem added: "I need a tool that turns my voice notes into Trello tasks" — just now</div>
+  </div>
+
+  <div class="cta-bar">
+    <!-- تم تغيير Maker إلى Entrepreneur -->
+    <div class="cta-text">🚀 Ready to find your next big idea?</div>
+    <div class="cta-buttons">
+      <button class="btn btn-primary" id="browseBtn"><span>🔎</span> Browse as an Entrepreneur</button>
+      <button class="btn btn-outline" id="addProblemBtn"><span>➕</span> Submit a Problem</button>
+    </div>
+  </div>
+
+  <h2 class="section-title">🔥 Trending Problems Right Now</h2>
+  <div class="problem-grid" id="problemContainer"></div>
+
+  <div class="submit-section" id="submitSection" style="display: none;">
+    <h2>📝 What problem do you wish someone would solve?</h2>
+    <p style="color: #475569;">Describe it in one line. We'll share it with entrepreneurs who can build it.</p>
+    <div class="form-wrapper">
+      <input type="text" id="problemInput" placeholder="e.g., I can't easily schedule social media posts across platforms...">
+      <button class="btn-submit" id="submitProblemBtn">Submit Problem</button>
+    </div>
+    <div class="feedback-msg" id="submitFeedback">✅ Problem added! We'll notify you if an entrepreneur picks it up.</div>
+  </div>
+
+  <!-- Modal with Google Forms (no changes) -->
+  <div class="modal" id="makerModal">
+    <div class="modal-content">
+      <button class="close-modal" id="closeModal">&times;</button>
+      <h2>🔐 Join the Waitlist</h2>
+      <p>Enter your email to get early access and weekly top problems.</p>
+      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfb1V8LdHtX-AFaY8dX5V0byko6zYWQpnPJg-JI7F1CgLVJ3g/viewform?embedded=true"
+              width="100%" height="350" frameborder="0" marginheight="0" marginwidth="0"
+              style="border-radius: 12px;" id="googleFormFrame">
+        Loading…
+      </iframe>
+      <p class="privacy-note">🔒 We'll only use your email to add you to the waitlist. No spam, unsubscribe anytime.</p>
+    </div>
+  </div>
+
+  <!-- تم حذف أي إشارة لـ r/SomebodyMakeThis من الفوتر -->
+  <footer>© 2025 Problem Bank — 📧 We collect emails solely for the waitlist. Your data is never shared. <a href="#">Privacy Policy</a></footer>
+</div>
+
+<script>
+  const problems = [
+    { text: "I need a tool that turns my voice notes into Trello tasks automatically", votes: 127 },
+    { text: "I pay $30/month just to integrate Shopify with my accounting software and it's a pain", votes: 89 },
+    { text: "There's no simple Arabic-first app to schedule Twitter & LinkedIn posts together", votes: 56 },
+    { text: "I wish I had a dashboard that shows all my monthly subscriptions and alerts before renewal", votes: 42 },
+    { text: "Managing remote team tasks across tools is chaotic, I need one unified dashboard", votes: 38 },
+    { text: "No easy way to collect customer feedback and turn it into a public roadmap", votes: 31 }
+  ];
+
+  function renderProblems() {
+    document.getElementById('problemContainer').innerHTML = problems.map(p => `
+      <div class="problem-card">
+        <p class="problem-text">“${p.text}”</p>
+        <span class="vote-badge"><span>👍</span> ${p.votes} votes</span>
+      </div>
+    `).join('');
+  }
+  renderProblems();
+
+  document.getElementById('browseBtn').addEventListener('click', () => {
+    document.getElementById('makerModal').style.display = 'flex';
+  });
+  document.getElementById('addProblemBtn').addEventListener('click', () => {
+    document.getElementById('submitSection').style.display = 'block';
+    document.getElementById('addProblemBtn').style.display = 'none';
+  });
+  document.getElementById('closeModal').addEventListener('click', () => {
+    document.getElementById('makerModal').style.display = 'none';
+  });
+  window.addEventListener('click', (e) => {
+    if (e.target === document.getElementById('makerModal')) {
+      document.getElementById('makerModal').style.display = 'none';
+    }
+  });
+
+  document.getElementById('submitProblemBtn').addEventListener('click', () => {
+    const input = document.getElementById('problemInput');
+    const text = input.value.trim();
+    if (text) {
+      problems.unshift({ text, votes: 1 });
+      renderProblems();
+      document.getElementById('problemCount').textContent = parseInt(document.getElementById('problemCount').textContent) + 1;
+      document.getElementById('submitFeedback').style.display = 'block';
+      input.value = '';
+      document.getElementById('latestAlert').innerHTML = `<span class="live-dot"></span> New problem added: "${text}" — just now`;
+      setTimeout(() => { document.getElementById('submitFeedback').style.display = 'none'; }, 3000);
+    }
+  });
+
+  // محاولة إغلاق المودال بعد إرسال النموذج (اختياري)
+  const formFrame = document.getElementById('googleFormFrame');
+  formFrame.addEventListener('load', function() {
+    try {
+      const iframeDoc = formFrame.contentDocument || formFrame.contentWindow.document;
+      if (iframeDoc && iframeDoc.body.innerText.includes('Your response has been recorded')) {
+        document.getElementById('entrepreneurCount').textContent = parseInt(document.getElementById('entrepreneurCount').textContent) + 1;
+        setTimeout(() => {
+          document.getElementById('makerModal').style.display = 'none';
+        }, 4000);
+      }
+    } catch (e) {}
+  });
+</script>
+</body>
+</html>
